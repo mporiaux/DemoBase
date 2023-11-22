@@ -1,1 +1,27 @@
-<p>contacts works!</p>
+<div>
+  nom : <input type="text" [(ngModel)]="nouvNom"/><br/>
+  tel :<input type="text" [(ngModel)]="nouvTel"/><br/>
+  <button (click)="addContact()" [disabled]="nouvNom.length==0 || nouvTel.length==0">Ajouter contact</button>
+</div>
+<div *ngIf="listContacts.length>0; else vide">
+  <ul>
+    <li *ngFor="let c of listContacts">
+      {{c.nom}}:{{c.tel}}
+    </li>
+  </ul>
+  <div>
+    nom recherché : <input type ="text" [(ngModel)]="nomRech">
+    <button (click)="recherche()" [disabled]="nomRech.length==0">recherche</button>
+  </div>
+  <div *ngIf="telRech!=null; else inconnu" >
+    téléphone = {{telRech}}
+  </div>
+  <ng-template #inconnu>
+    téléphone inconnu
+  </ng-template>
+
+</div>
+
+<ng-template #vide>
+  aucun contact encodé
+</ng-template>
